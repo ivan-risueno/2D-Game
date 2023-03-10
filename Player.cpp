@@ -7,7 +7,7 @@
 
 
 #define JUMP_ANGLE_STEP 4	// Saltar mas rapido o no
-#define JUMP_HEIGHT 100
+#define JUMP_HEIGHT 16
 #define FALL_STEP 4			// Saltar mas rapido o no
 
 
@@ -69,7 +69,7 @@ void Player::update(int deltaTime)
 	sprite->update(deltaTime);
 	if (Game::instance().getSpecialKey(GLUT_KEY_LEFT))
 	{
-		if (sprite->animation() != MOVE_LEFT)
+		if ((sprite->animation() != MOVE_LEFT) && (!bJumping))
 			sprite->changeAnimation(MOVE_LEFT);
 		posPlayer.x -= 2;
 		if (map->collisionMoveLeft(posPlayer, glm::ivec2(32, 32)))
@@ -80,7 +80,7 @@ void Player::update(int deltaTime)
 	}
 	else if (Game::instance().getSpecialKey(GLUT_KEY_RIGHT))
 	{
-		if (sprite->animation() != MOVE_RIGHT)
+		if ((sprite->animation() != MOVE_RIGHT) && (!bJumping))
 			sprite->changeAnimation(MOVE_RIGHT);
 		posPlayer.x += 2;
 		if (map->collisionMoveRight(posPlayer, glm::ivec2(32, 32)))
