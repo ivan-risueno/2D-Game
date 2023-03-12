@@ -1,0 +1,35 @@
+TILEMAP
+32 30 							-- Size of tile map in tiles
+16 16 							-- Tile size & block size
+images/tileset.png 	-- Tilesheet
+11 4 							-- Number of tiles in tilesheet
+9:;678678678678678678678678679:;
+DEFABCABCABCABCABCABCABCABCABDEF
+9:;LMNLMNLMNLMNLMNLMNLMNLMNLM9:;
+DEF                          DEF
+9:;                          9:;
+DEF                          DEF
+9:;       123456789:;        9:;
+DEF       <=>?@ABCDEF        DEF
+9:;       GHIJKLMNOPQ        9:;
+DEF       RSTUVWXYZ[\        DEF
+9:;                          9:;
+DEF                          DEF
+9:;                          9:;
+DEF                          DEF
+9:;                          9:;
+DEF                          DEF
+9:;                          9:;
+DEF                          DEF
+9:;                          9:;
+DEF                          DEF
+9:;                          9:;
+DEF                          DEF
+9:;                          9:;
+DEF                          DEF
+9:;                          9:;
+DEF                          DEF
+9:;                          9:;
+DEF                          DEF
+9:;123412341234123412341234129:;
+DEF<=>?<=>?<=>?<=>?<=>?<=>?<=DEF
