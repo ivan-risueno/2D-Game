@@ -1,5 +1,5 @@
 TILEMAP
-18 16 							-- Size of tile map in tiles
+18 24 							-- Size of tile map in tiles
 16 32 							-- Tile size & block size
 images/blocks.png 	-- Tilesheet
 2 2 								-- Number of tiles in tilesheet
@@ -14,6 +14,12 @@ images/blocks.png 	-- Tilesheet
 1                1
 1                1
 1                1
+1                1
+1                1
+1                1
+1  33         33 1
+1                1
+1      3333      1
 1                1
 1                1
 1                1
