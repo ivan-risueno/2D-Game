@@ -37,10 +37,10 @@ void Scene::init()
 	player->setTileMap(map);
 
 	//pruebas enemy
-	enemy = new Enemy();
-	enemy->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram, "right");
-	enemy->setPosition(glm::vec2(INIT_PLAYER_X_TILES * map->getTileSize(), 7 * map->getTileSize()));
-	enemy->setTileMap(map);
+	skeleton = new Skeleton();
+	skeleton->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram, true, 48, -48);
+	skeleton->setPosition(glm::vec2(INIT_PLAYER_X_TILES * map->getTileSize(), 7 * map->getTileSize()));
+	skeleton->setTileMap(map);
 
 	projection = glm::ortho(0.f, float(SCREEN_WIDTH - 1)/2.0f, float(SCREEN_HEIGHT - 1)/2.0f, 0.f);
 	currentTime = 0.0f;
@@ -50,7 +50,7 @@ void Scene::update(int deltaTime)
 {
 	currentTime += deltaTime;
 	player->update(deltaTime);
-	enemy->update(deltaTime);
+	skeleton->update(deltaTime);
 }
 
 void Scene::render()
@@ -65,7 +65,7 @@ void Scene::render()
 	texProgram.setUniform2f("texCoordDispl", 0.f, 0.f);
 	map->render();
 	player->render();
-	enemy->render();
+	skeleton->render();
 }
 
 void Scene::initShaders()

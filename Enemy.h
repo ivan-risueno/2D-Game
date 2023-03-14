@@ -12,16 +12,16 @@ class Enemy
 {
 
 public:
-	void init(const glm::ivec2& tileMapPos, ShaderProgram& shaderProgram, string direction);
+	void init(const glm::ivec2& tileMapPos, ShaderProgram& shaderProgram, bool right);
 	void update(int deltaTime);
 	void render();
 
 	void setTileMap(TileMap* tileMap);
 	void setPosition(const glm::vec2& pos);
 
-private:
+protected:
 
-	string direction;
+	bool movingRight;
 	glm::ivec2 tileMapDispl, posEnemy;
 	Texture spritesheet;
 	Sprite* sprite;
@@ -30,4 +30,4 @@ private:
 };
 
 
-#endif // _PLAYER_INCLUDE
+#endif // _ENEMY_INCLUDE

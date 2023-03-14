@@ -4,6 +4,7 @@
 #include <GL/glut.h>
 #include "Enemy.h"
 #include "Game.h"
+#include "Skeleton.h"
 
 
 #define ENEMY_SPEED 1
@@ -14,11 +15,12 @@ enum EnemyAnims
 	STAND_LEFT, STAND_RIGHT, MOVE_LEFT, MOVE_RIGHT
 };
 
-
-
-void Enemy::init(const glm::ivec2& tileMapPos, ShaderProgram& shaderProgram, bool right)
+//Cambiar el sprite y las animaciones
+void Skeleton::init(const glm::ivec2& tileMapPos, ShaderProgram& shaderProgram, bool right, int stpr, int stpl)
 {
 	movingRight = right;
+	stepsRight = stpr;
+	stepsLeft = stpl;
 
 	spritesheet.loadFromFile("images/bub.png", TEXTURE_PIXEL_FORMAT_RGBA);
 	sprite = Sprite::createSprite(glm::ivec2(32, 32), glm::vec2(0.25, 0.25), &spritesheet, &shaderProgram);
@@ -46,51 +48,34 @@ void Enemy::init(const glm::ivec2& tileMapPos, ShaderProgram& shaderProgram, boo
 
 }
 
-void Enemy::update(int deltaTime)
+
+void Skeleton::update(int deltaTime)
 {
 	sprite->update(deltaTime);
-	
+
 	if (movingRight) {
 		posEnemy.x += ENEMY_SPEED;
-		if (sprite->animation() != MOVE_RIGHT){
+		if (sprite->animation() != MOVE_RIGHT) {
 			sprite->changeAnimation(MOVE_RIGHT);
 		}
-		if (map->collisionMoveRight(posEnemy, glm::ivec2(32, 32))) {
+		if (map->collisionMoveRight(glm::vec2(posEnemy.x + stepsRight, posEnemy.y), glm::ivec2(32, 32))) {
 			movingRight = false;
-			posEnemy.x -= ENEMY_SPEED*2;
+			posEnemy.x -= ENEMY_SPEED * 2;
 		}
+		
 	}
 
-	else if (!movingRight){
+	else if (!movingRight) {
 		posEnemy.x -= ENEMY_SPEED;
 		if (sprite->animation() != MOVE_LEFT) {
 			sprite->changeAnimation(MOVE_LEFT);
 		}
-		if (map->collisionMoveLeft(posEnemy, glm::ivec2(32, 32))) {
+		if (map->collisionMoveLeft(glm::vec2(posEnemy.x + stepsLeft, posEnemy.y), glm::ivec2(32, 32))) {
 			movingRight = true;
 			posEnemy.x += ENEMY_SPEED * 2;
 
 		}
 	}
 
-	posEnemy.y += FALL_STEP;
-	map->collisionMoveDown(posEnemy, glm::ivec2(32, 32), &posEnemy.y);
-
-	sprite->setPosition(glm::vec2(float(tileMapDispl.x + posEnemy.x), float(tileMapDispl.y + posEnemy.y)));
-}
-
-void Enemy::render()
-{
-	sprite->render();
-}
-
-void Enemy::setTileMap(TileMap* tileMap)
-{
-	map = tileMap;
-}
-
-void Enemy::setPosition(const glm::vec2& pos)
-{
-	posEnemy = pos;
 	sprite->setPosition(glm::vec2(float(tileMapDispl.x + posEnemy.x), float(tileMapDispl.y + posEnemy.y)));
 }
